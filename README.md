@@ -51,4 +51,35 @@ Duo enforces a rigorous evaluation framework utilizing the **Equivalence Princip
    - The scores assigned to the Challenger and Opponent are within a **±2 margin** of tolerance.
 3. **No-Nondet-Leak safety:** The contract fixes linter reachability violations by ensuring the `gl.nondet` calls are kept strictly within `leader_fn`, preventing validators from invoking non-deterministic commands directly in their validation paths.
 
+---
+
+## 🛠️ Local Development & Setup Guide
+
+### Contract Deployment
+1. Install the GenLayer CLI:
+   ```bash
+   npm install -g genlayer
+   ```
+2. Configure the CLI for the Studio Network:
+   ```bash
+   genlayer network set studionet
+   ```
+3. Deploy the contract:
+   ```bash
+   genlayer deploy --contract contracts/duo_arena.py
+   ```
+
+### Frontend Setup
+1. Navigate to the frontend directory and install dependencies:
+   ```bash
+   cd frontend
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+3. Open `http://localhost:3000` to view the web application.
+
+
 
