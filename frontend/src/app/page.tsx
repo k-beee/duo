@@ -159,16 +159,38 @@ export default function ArenaHome() {
       setShowCreate(false);
     } catch (e: any) {
       const msg = e?.message || String(e);
-      if (/consensus|abort|canceled|timeout/i.test(msg)) {
+      
+      // Load latest updates from the chain anyway to see if transaction resolved
+      try {
+        await loadChallenges();
+        if (selected) {
+          const updatedRaw = await readClient().readContract({
+            address: CONTRACT_ADDRESS,
+            functionName: "get_challenge",
+            args: [selected.id],
+          });
+          setSelected(JSON.parse(updatedRaw as string));
+        }
+      } catch (loadErr) {
+        console.error("Failed to reload state during error cleanup:", loadErr);
+      }
+
+      if (/timeout/i.test(msg)) {
+        setToastMsg("⌛ Network timeout waiting for receipt. Updating state from chain…");
+        setTimeout(() => setToastMsg(""), 3500);
+      } else if (/consensus|abort|canceled/i.test(msg)) {
         setToastMsg("⚠ AI Consensus Failure: The validator pool disagreed on the scores. You can trigger the evaluation again.");
+        setTimeout(() => setToastMsg(""), 4500);
       } else if (/insufficient funds/i.test(msg)) {
         setToastMsg("⚠ Transaction failed: Insufficient GEN balance.");
-      } else if (/user rejected/i.test(msg)) {
+        setTimeout(() => setToastMsg(""), 4500);
+      } else if (/user rejected|rejected/i.test(msg)) {
         setToastMsg("Transaction rejected by user.");
+        setTimeout(() => setToastMsg(""), 2500);
       } else {
         setToastMsg(`Error: ${msg.slice(0, 80)}…`);
+        setTimeout(() => setToastMsg(""), 4500);
       }
-      setTimeout(() => setToastMsg(""), 4500);
     }
     setLoading(false);
   }
