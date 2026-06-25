@@ -22,6 +22,32 @@ Duo leverages **GenLayer's Intelligent Contracts** to execute subjective judgmen
 3. **Double Submission:** Both participants draft and submit their answers independently.
 4. **AI Verdict & Resolution:** A decentralized validator consensus scores both inputs on Quality, Correctness, and Ingenuity. The higher score secures the entire prize pool, automatically transferred by the contract.
 
+```mermaid
+graph TD
+    %% Nodes and Actions
+    A[Challenger] -->|1. open_challenge + stake| B(DuoArena Contract)
+    C[Opponent] -->|2. accept_challenge + matching stake| B
+    
+    A -->|3. submit_solution| B
+    C -->|3. submit_solution| B
+    
+    D[Any Participant] -->|4. evaluate_challenge| B
+    
+    subgraph GenLayer Decentralized Network
+        B -->|Trigger Consensus| E{gl.vm.run_nondet_unsafe}
+        E -->|Execute LLM| F[Leader Node]
+        E -->|Execute LLM| G[Validator 1]
+        E -->|Execute LLM| H[Validator N]
+        
+        F -->|Leader Output| I{Equivalence Check}
+        G -->|Validator Output| I
+        H -->|Validator Output| I
+    end
+    
+    I -->|Consensus: Winner matches & scores within +/- 2| J[Payout Winner & Resolve Duel]
+    I -->|Consensus Failure: Scores diverged| K[Cancel Tx / Preserves Stakes]
+```
+
 ---
 
 ## 📜 Contract API Reference
