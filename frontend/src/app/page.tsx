@@ -279,9 +279,6 @@ export default function ArenaHome() {
                 <button className="btn-primary-action" onClick={() => setShowCreate(true)}>
                   Create Challenge
                 </button>
-                <a href="https://testnet-faucet.genlayer.foundation/" target="_blank" rel="noopener noreferrer" className="btn-secondary-action">
-                  Get GEN Tokens
-                </a>
               </div>
             </div>
 
