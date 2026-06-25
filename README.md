@@ -3,7 +3,7 @@
 Duo is an elite, decentralized 1v1 challenge and peer-review arena built on GenLayer. It matches developers, writers, designers, and creatives in high-stakes duels where subjective solutions are evaluated by a decentralized panel of AI validators.
 
 🔗 **Vercel Web App:** *Available once deployed*
-📜 **Contract (GenLayer Studionet):** *Pending deployment*
+📜 **Contract (GenLayer Studionet):** `0xe86efF20d158671bdc20B61De432B228cEAAbCb4`
 
 ---
 
