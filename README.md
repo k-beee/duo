@@ -91,6 +91,17 @@ Duo features a professional, high-end dashboard interface tailored for developer
 - **Visual Performance Metrology:** The AI consensus verdict panel utilizes interactive progress-meter bars side-by-side to visually display and compare validator scores.
 - **Category Colors:** Custom gradients and icons differentiate skill categories dynamically (Indigo for Coding, Pink for Writing, Rose for Design, Green for Math, Amber for Trivia).
 
+---
+
+## 🔍 Troubleshooting & FAQ
+
+### What happens in case of a Consensus Draw?
+If the decentralized AI validators disagree on the evaluation beyond the ±2 score tolerance, the transaction fails consensus and returns a `CANCELED` status. Duo's frontend detects this transaction status and alerts the user: *"Consensus Draw: AI validators diverged in their grading. No winner declared. Stake preserved - retry judgment."* The users' staked tokens remain locked in the contract, and any participant can trigger the judgment again.
+
+### Do I need to install a MetaMask Snap to connect?
+No. Duo uses standard wallet routing. By requesting the wallet to switch to chain `61999` and add the network parameters automatically, users can sign transactions through standard EVM popups without needing custom Snap configurations.
+
+
 
 
 
