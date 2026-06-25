@@ -21,3 +21,21 @@ Duo leverages **GenLayer's Intelligent Contracts** to execute subjective judgmen
 2. **Opponent Acceptance:** Another user matches the staked amount to lock the duel and active matchmaking.
 3. **Double Submission:** Both participants draft and submit their answers independently.
 4. **AI Verdict & Resolution:** A decentralized validator consensus scores both inputs on Quality, Correctness, and Ingenuity. The higher score secures the entire prize pool, automatically transferred by the contract.
+
+---
+
+## 📜 Contract API Reference
+
+The `DuoArena` contract exposes the following write and view methods:
+
+### Write Methods (State Modifying)
+- `open_challenge(category: str, prompt: str) -> i32 (payable)`: Opens a new challenge in the arena. The caller must attach a positive GEN stake.
+- `accept_challenge(challenge_id: str) (payable)`: Matches the challenger's stake and locks the challenge to the active matching phase.
+- `submit_solution(challenge_id: str, solution: str)`: Allows participants to submit their draft response (allowed during matching or submission phases).
+- `evaluate_challenge(challenge_id: str)`: Runs the decentralized AI consensus evaluation. It distributes the combined staked pools to the winner and updates the status to resolved.
+- `cancel_challenge(challenge_id: str)`: Allows the challenger to cancel an open challenge before any opponent accepts, returning the full stake.
+
+### View Methods (Read Only)
+- `get_challenge(challenge_id: str) -> str`: Returns the full state of the challenge serialized as a JSON string.
+- `get_challenge_count() -> i32`: Returns the total number of challenges initialized in the arena.
+
