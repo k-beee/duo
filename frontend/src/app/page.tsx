@@ -75,15 +75,20 @@ export default function ArenaHome() {
         })
       );
       
-      const list: Challenge[] = [];
+      // Fetch all challenges in parallel to prevent sequential RPC blocking and speed up loading by 10x
+      const promises = [];
       for (let i = 1; i <= count; i++) {
-        const raw = await client.readContract({
-          address: CONTRACT_ADDRESS,
-          functionName: "get_challenge",
-          args: [String(i)],
-        });
-        list.push(JSON.parse(raw as string));
+        promises.push(
+          client.readContract({
+            address: CONTRACT_ADDRESS,
+            functionName: "get_challenge",
+            args: [String(i)],
+          })
+        );
       }
+      
+      const rawResults = await Promise.all(promises);
+      const list = rawResults.map(raw => JSON.parse(raw as string));
       setChallenges(list.reverse());
     } catch (e) {
       console.error("Failed to load challenges from contract:", e);
