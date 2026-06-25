@@ -39,3 +39,16 @@ The `DuoArena` contract exposes the following write and view methods:
 - `get_challenge(challenge_id: str) -> str`: Returns the full state of the challenge serialized as a JSON string.
 - `get_challenge_count() -> i32`: Returns the total number of challenges initialized in the arena.
 
+---
+
+## ⚖️ AI Consensus & Equivalence Principle
+
+Duo enforces a rigorous evaluation framework utilizing the **Equivalence Principle** to guarantee fair and deterministic outcomes on subjective inputs:
+
+1. **Deterministic Prompts:** The contract instructs the LLM to output a strict JSON block structure. Markdown syntax formatting is programmatically stripped and normalized to prevent simple syntax differences from breaking consensus.
+2. **Equivalence Bounds Check:** In `validator_fn(leader_result)`, instead of requiring a byte-for-byte match on the entire LLM response, the validators verify that:
+   - The winner is identical.
+   - The scores assigned to the Challenger and Opponent are within a **±2 margin** of tolerance.
+3. **No-Nondet-Leak safety:** The contract fixes linter reachability violations by ensuring the `gl.nondet` calls are kept strictly within `leader_fn`, preventing validators from invoking non-deterministic commands directly in their validation paths.
+
+
