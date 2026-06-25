@@ -81,5 +81,16 @@ Duo enforces a rigorous evaluation framework utilizing the **Equivalence Princip
    ```
 3. Open `http://localhost:3000` to view the web application.
 
+---
+
+## 🎨 UI design & Aesthetics
+
+Duo features a professional, high-end dashboard interface tailored for developers and competitive professionals:
+- **Obsidian Dark Mode:** Built using a deep midnight grey background (`#030712`) and slate gray typography, creating a premium visual identity.
+- **Glassmorphic Navigation:** Elements incorporate modern CSS backdrop blur filters for a unified, clean overlay experience.
+- **Visual Performance Metrology:** The AI consensus verdict panel utilizes interactive progress-meter bars side-by-side to visually display and compare validator scores.
+- **Category Colors:** Custom gradients and icons differentiate skill categories dynamically (Indigo for Coding, Pink for Writing, Rose for Design, Green for Math, Amber for Trivia).
+
+
 
 
